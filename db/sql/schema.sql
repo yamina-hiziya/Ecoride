@@ -1,8 +1,13 @@
-CREATE DATABASE IF NOT EXISTS ecoride_db;
-
 -- db/sql/schema.sql
 CREATE DATABASE IF NOT EXISTS ecoride_db;
 USE ecoride_db;
+
+CREATE USER 'utilisateur'@'localhost' IDENTIFIED BY 'mot_de_passe';
+-- créer l'utilisateur avec un mot de passe sécurisé
+GRANT ALL PRIVILEGES ON ecoride_db .* TO 'utilisateur'@'localhost';
+-- donne tous les privilèges sur la base de données à l'utilisateur
+
+FLUSH PRIVILEGES;  -- applique les changements de privilèges
 
 -- Table des utilisateurs (users)
 -- Nous combinons les utilisateurs, employés et administrateurs dans une seule table

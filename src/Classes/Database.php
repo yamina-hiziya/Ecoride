@@ -3,30 +3,35 @@
 
 class Database {
     private static $instance = null;
-    private $conn;
-
-    private function __construct() {
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "ecoride_db";
+    private $connection = null;
     
+    private $host = 'localhost';
+    private $dbname = 'ecoride_db';
+    private $username = 'utilisateur';
+    private $password = 'mot_de_passe';
+    
+    private function __construct() {
         try {
-            $this->conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch(PDOException $e) {
-            die("Échec de la connexion à la base de données : " . $e->getMessage());
+            $this->connection = new PDO(
+                "mysql:host={$this->host};dbname={$this->dbname}",
+                $this->username,
+                $this->password
+            );
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            throw new Exception("Erreur de connexion à la base de données : " . $e->getMessage());
         }
     }
-
+    
     public static function getInstance() {
-        if (!self::$instance) {
-            self::$instance = new Database();
+        if (self::$instance === null) {
+            self::$instance = new self();
         }
         return self::$instance;
     }
-
+    
     public function getConnection() {
-        return $this->conn;
+        return $this->connection;
     }
 }
+?>

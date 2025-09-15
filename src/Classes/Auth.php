@@ -16,34 +16,52 @@ class Auth
     }
 
     public function login($email, $password) {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
         try {
-            // Préparer la requête pour trouver l'utilisateur par son email
-            $stmt = $this->conn->prepare("SELECT id, pseudo, email, mot_de_passe FROM utilisateurs WHERE email = ?");
+            // Préparer la requête pour récupérer l'utilisateur
+            $stmt = $this->conn->prepare("SELECT id, nom, prenom, email, mot_de_passe FROM utilisateurs WHERE email = ?");
             $stmt->execute([$email]);
+            
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+            
             // Vérifier si l'utilisateur existe et si le mot de passe est correct
             if ($user && password_verify($password, $user['mot_de_passe'])) {
-                // Créer une session pour l'utilisateur
-                // Si les identifiants sont corrects, on stocke les infos de l'utilisateur en session
+                // Démarrer la session
+                if (session_status() === PHP_SESSION_NONE) {
+                    session_start();
+                }
+                
+                // Stocker les informations de l'utilisateur en session
                 $_SESSION['user_id'] = $user['id'];
-                $_SESSION['username'] = $user['pseudo'];
+                $_SESSION['user_nom'] = $user['nom'];
+                $_SESSION['user_prenom'] = $user['prenom'];
                 $_SESSION['user_email'] = $user['email'];
+                
                 return true;
-            } else {
-                return false;
             }
+            
+            return false;
         } catch (PDOException $e) {
-            // Gérer l'erreur de base de données
+            error_log("Erreur lors de la connexion : " . $e->getMessage());
             return false;
         }
     }
     
     public function register($nom, $prenom, $email, $password, $telephone, $pseudo) {
         try {
+            // Vérifier si l'email existe déjà
+            $stmt = $this->conn->prepare("SELECT id FROM utilisateurs WHERE email = ?");
+            $stmt->execute([$email]);
+            if ($stmt->fetch()) {
+                return false; // Email déjà utilisé
+            }
+            
+            // Vérifier si le pseudo existe déjà
+            $stmt = $this->conn->prepare("SELECT id FROM utilisateurs WHERE pseudo = ?");
+            $stmt->execute([$pseudo]);
+            if ($stmt->fetch()) {
+                return false; // Pseudo déjà utilisé
+            }
+            
             // Hacher le mot de passe
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     
@@ -76,12 +94,20 @@ class Auth
         }
         return isset($_SESSION['user_id']);
     }
+    
+    public function getCurrentUser() {
+        if ($this->isLoggedIn()) {
+            return [
+                'id' => $_SESSION['user_id'],
+                'nom' => $_SESSION['user_nom'],
+                'prenom' => $_SESSION['user_prenom'],
+                'email' => $_SESSION['user_email']
+            ];
+        }
+        return null;
+    }
 }
 
-// Test de connexion à la base de données
-try {
-    $pdo = new PDO('mysql:host=localhost;dbname=nom_de_la_base', 'utilisateur', 'mot_de_passe');
-    echo "Connexion réussie";
-} catch (PDOException $e) {
-    echo "Erreur de connexion : " . $e->getMessage();
-}
+
+
+
