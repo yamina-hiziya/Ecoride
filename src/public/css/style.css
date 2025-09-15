@@ -1,0 +1,83 @@
+/* src/public/css/style.css */
+
+/* Couleurs principales */
+:root {
+    --primary-color: #2c4b3b; /* vert emeraude */
+    --secondary-color: #67a97b; /* Vert clair */
+    --bg-color: #c7baa3; /* Beige */
+    --text-color: #333; /* Gris foncé */
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* Style de la barre de navigation */
+.navbar {
+    background-color: var(--primary-color) !important;
+}
+
+.navbar-brand, .nav-link {
+    color: #c7baa3 !important;
+}
+
+.nav-link.active {
+    background-color: #38455c;
+    border-radius: 5px;
+}
+
+/* Style du pied de page */
+.footer {
+    background-color: var(--primary-color);
+    color: beige;
+}
+/* Assure-toi que les textes en "primary" sont de la bonne couleur */
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+/* Si tu as des boutons de type "outline" */
+.btn-outline-primary {
+    color: var(--secondary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: #38455c !important;
+    color: beige !important;
+}
+
+/* style pour le logo principal NAVBAR */
+.navbar-brand img {
+    margin-right: 10px; /* Ajoute un peu d'espace à droite du logo */
+}
+
+/* Style de la bannière vidéo */
+.video-banner {
+    position: relative;
+    height: 400px; /* Hauteur de la bannière, à ajuster si besoin */
+    overflow: hidden;
+}
+
+.video-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1; /* Place la vidéo en arrière-plan */
+    transform: translate(-50%, -50%);
+}
+
+.video-overlay {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: #c7baa3; /* Pour que le texte soit lisible sur la vidéo */
+    padding-top: 150px;
+    background-color: rgba(0, 0, 0, 0.5); /* Ajoute un fond sombre semi-transparent pour le contraste */
+    height: 100%;
+}
