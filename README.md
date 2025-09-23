@@ -88,11 +88,7 @@ http://localhost/ecoride
 - **`covoiturages`** : Trajets proposés (6 enregistrements)
 - **`reservations`** : Réservations effectuées (1 enregistrement)
 
-### Compte de test
-```
-Email : test@ecoride.com
-Mot de passe : Test123!
-```
+
 
 ## 🎮 Utilisation
 
