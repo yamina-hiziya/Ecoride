@@ -1,55 +1,59 @@
 <?php
-// filepath: /src/Models/Auth/connexion.php
+
+// Toujours démarrer la session si pas déjà démarrée
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Récupération et validation des données du formulaire
-    $email = trim($_POST['email'] ?? '');
-    $password = $_POST['password'] ?? '';
-    
-    // Validation basique
-    if (empty($email) || empty($password)) {
-        $_SESSION['error_message'] = "Email et mot de passe requis";
-        header('Location: index.php?page=connexion');
-        exit;
-    }
-    
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $_SESSION['error_message'] = "Format d'email invalide";
-        header('Location: index.php?page=connexion');
-        exit;
-    }
-    
-    try {
-        // Utilisation de la classe Auth (déjà incluse dans index.php)
-        $auth = new Auth();
-        $result = $auth->login($email, $password);
-        
-        if ($result) {
-            // Connexion réussie
-            $_SESSION['success_message'] = "Connexion réussie ! Bienvenue.";
-            header('Location: index.php?page=dashboard');
-            exit;
-        } else {
-            // Échec de la connexion
-            $_SESSION['error_message'] = "Email ou mot de passe incorrect";
-            header('Location: index.php?page=connexion');
-            exit;
-        }
-        
-    } catch (Exception $e) {
-        // Erreur système
-        error_log("Erreur lors de la connexion : " . $e->getMessage());
-        $_SESSION['error_message'] = "Une erreur est survenue lors de la connexion. Veuillez réessayer.";
-        header('Location: index.php?page=connexion');
-        exit;
-    }
-    
-} else {
-    // Si la requête n'est pas en POST, rediriger vers la page de connexion
-    header('Location: index.php?page=connexion');
+// Vérifier que la requête est bien en POST
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    $_SESSION['error'] = 'Méthode non autorisée';
+    header('Location: /Ecoride/index.php?page=connexion');
     exit;
 }
-?>
+
+// Récupérer et nettoyer les données
+$email    = trim($_POST['email'] ?? '');
+$password = $_POST['password'] ?? '';
+
+// Validation des champs
+if (empty($email) || empty($password)) {
+    $_SESSION['error'] = 'Veuillez remplir tous les champs';
+    header('Location: /Ecoride/index.php?page=connexion');
+    exit;
+}
+
+// Vérifier format email
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $_SESSION['error'] = 'Format d\'email invalide';
+    header('Location: /Ecoride/index.php?page=connexion');
+    exit;
+}
+
+try {
+    // Charger la classe Auth
+    require_once ROOT_PATH . '/src/Classes/Auth.php';
+    $auth = new Auth();
+
+    // Tentative de connexion
+    if ($auth->login($email, $password)) {
+        $_SESSION['success'] = 'Connexion réussie ! Bienvenue ' . ($_SESSION['user_prenom'] ?? '');
+
+        // Redirection après connexion (dashboard par défaut)
+        $redirect = $_SESSION['redirect_after_login'] ?? 'dashboard';
+        unset($_SESSION['redirect_after_login']);
+
+        header('Location: /Ecoride/index.php?page=' . $redirect);
+        exit;
+    } else {
+        $_SESSION['error'] = 'Email ou mot de passe incorrect';
+        header('Location: /Ecoride/index.php?page=connexion');
+        exit;
+    }
+
+} catch (Exception $e) {
+    error_log("Erreur connexion: " . $e->getMessage());
+    $_SESSION['error'] = 'Erreur technique lors de la connexion';
+    header('Location: /Ecoride/index.php?page=connexion');
+    exit;
+}

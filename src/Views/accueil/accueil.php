@@ -1,69 +1,148 @@
 <?php
-require_once ROOT_PATH . '/Classes/Covoiturage.php';
+// AJOUTEZ CETTE LIGNE AU TOUT DÉBUT (ligne 1 ou 2) :
+require_once ROOT_PATH . '/src/Classes/Covoiturage.php';
+
 $covoiturageManager = new Covoiturage();
 $trajets = $covoiturageManager->getPublicTrajets();
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecoride - Accueil</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/Ecoride/src/public/css/style.css">
-</head>
-
-<body>
-
-    <?php include ROOT_PATH . '/includes/nav.php'; ?>
-
-    <div class="video-banner">
-        <video autoplay muted loop class="video-bg">
-            <source src="/Ecoride/src/public/videos/covoiturages-videos.mp4" type="video/mp4">
-            Votre navigateur ne supporte pas la balise vidéo.
-        </video>
-        <div class="video-overlay">
-            <h1>Bienvenue sur Ecoride</h1>
-            <p>La startup "EcoRide" fraichement crée en France, a pour objectif de réduire l'impact environnemental des déplacements en encourageant le covoiturage. EcoRide prône une approche écologique et souhaite se faire connaître au travers d’un projet porté par José, le directeur technique, d’une application web.</p>
-        </div>
-    </div>
-
-    <main class="container mt-5">
-        <div class="row justify-content-center my-4">
-            <div class="col-md-8">
-                <form>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Entrez une ville de départ">
-                        <input type="text" class="form-control" placeholder="Entrez une ville d'arrivée">
-                        <button class="btn btn-success" type="submit">Rechercher</button>
-                    </div>
-                </form>
+    <!-- Vidéo Banner SANS filtre vert -->
+<div class="video-banner">
+    <video autoplay muted loop class="video-bg">
+        <source src="/Ecoride/src/public/videos/covoiturages-videos.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la balise vidéo.
+    </video>
+    <div class="video-overlay-natural">
+        <div class="container text-center text-white">
+            <h1 class="display-3 fw-bold mb-4">Bienvenue sur EcoRide</h1>
+            <p class="lead mb-4">La startup "EcoRide" fraîchement créée en France, a pour objectif de réduire l'impact environnemental des déplacements en encourageant le covoiturage.</p>
+            <div class="d-flex gap-3 justify-content-center flex-wrap">
+                <a href="index.php?page=covoiturage" class="btn btn-success btn-lg px-4">Trouver un trajet</a>
+                <?php if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in']): ?>
+                    <a href="index.php?page=proposer-covoiturage" class="btn btn-outline-light btn-lg px-4">Proposer un trajet</a>
+                <?php else: ?>
+                    <a href="index.php?page=inscription" class="btn btn-outline-light btn-lg px-4">S'inscrire</a>
+                <?php endif; ?>
             </div>
         </div>
-        <h2>Derniers covoiturages publiés</h2>
-        <div class="row">
-    <?php if (empty($trajets)): ?>
-        <p class="text-center">Aucun covoiturage n'est encore disponible.</p>
-    <?php else: ?>
-        <?php foreach ($trajets as $trajet): ?>
-            <div class="col-md-6 mb-4">
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <h5 class="card-title"><?= htmlspecialchars($trajet->lieu_depart) ?> → <?= htmlspecialchars($trajet->lieu_arrivee) ?></h5>
-            <p class="card-text">
-                <strong>Prix par personne :</strong> <?= htmlspecialchars($trajet->prix_par_personne) ?> €
-            </p>
-            <a href="index.php?page=covoiturage-detail&id=<?= $trajet->id ?>" class="btn btn-primary">Voir les détails</a>
-        </div>
     </div>
 </div>
-        <?php endforeach; ?>
-    <?php endif; ?>
-</div>
 
-        <section class="row my-5">
+<main class="container mt-5">
+    <!-- Barre de recherche avec palette naturelle -->
+    <div class="row justify-content-center my-5">
+        <div class="col-lg-10">
+            <div class="card shadow-lg border-0 search-card">
+                <div class="card-body p-4">
+                    <h3 class="text-center text-success mb-4">Recherchez votre trajet idéal</h3>
+                    <form action="index.php" method="GET">
+                        <input type="hidden" name="page" value="rechercher-covoiturage">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control form-control-lg eco-input" name="ville_depart" placeholder="Ville de départ" required>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control form-control-lg eco-input" name="ville_arrivee" placeholder="Ville d'arrivée" required>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-eco btn-lg w-100" type="submit">
+                                    🔍 Rechercher
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section des derniers covoiturages - Palette harmonieuse -->
+    <div class="container my-5">
+        <div class="section-eco">
+            <h2 class="section-title-eco">
+                Derniers covoiturages publiés
+            </h2>
+            
+            <div class="row">
+                <?php if (empty($trajets)): ?>
+                    <div class="col-12">
+                        <div class="empty-state-eco">
+                            <h4>Aucun covoiturage disponible</h4>
+                            <p>Soyez le premier à proposer un trajet écologique !</p>
+                            <?php if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in']): ?>
+                                <a href="index.php?page=proposer-covoiturage" class="btn-eco">Proposer un trajet</a>
+                            <?php else: ?>
+                                <a href="index.php?page=inscription" class="btn-eco">S'inscrire pour proposer</a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <?php foreach ($trajets as $trajet): ?>
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="card h-100 trajet-card-eco">
+                                <div class="card-body">
+                                    
+                                    <!-- TITRE DU TRAJET -->
+                                    <div class="d-flex justify-content-between align-items-start mb-3">
+                                        <h5 class="trajet-title">
+                                            <?= htmlspecialchars($trajet['ville_depart']) ?> → 
+                                            <?= htmlspecialchars($trajet['ville_arrivee']) ?>
+                                        </h5>
+                                        <span class="price-badge-eco">
+                                            <?= htmlspecialchars($trajet['prix_par_place']) ?> €
+                                        </span>
+                                    </div>
+                                    
+                                    <!-- CONDUCTEUR -->
+                                    <p class="conducteur-info">
+                                        <strong>Conducteur :</strong> <?= htmlspecialchars($trajet['prenom'] . ' ' . $trajet['nom']) ?>
+                                    </p>
+                                    
+                                    <!-- DÉTAILS DU TRAJET -->
+                                    <div class="trajet-details">
+                                        <?php if (isset($trajet['date_depart'])): ?>
+                                            <p class="detail-item">📅 <?= date('d/m/Y', strtotime($trajet['date_depart'])) ?></p>
+                                        <?php endif; ?>
+                                        
+                                        <?php if (isset($trajet['heure_depart'])): ?>
+                                            <p class="detail-item">🕐 <?= date('H:i', strtotime($trajet['heure_depart'])) ?></p>
+                                        <?php endif; ?>
+                                        
+                                        <?php if (isset($trajet['places_restantes'])): ?>
+                                            <p class="detail-item">👥 <?= $trajet['places_restantes'] ?> places disponibles</p>
+                                        <?php endif; ?>
+                                        
+                                        <?php if (isset($trajet['description']) && !empty($trajet['description'])): ?>
+                                            <p class="description-text">
+                                                "<?= htmlspecialchars(substr($trajet['description'], 0, 80)) ?><?= strlen($trajet['description']) > 80 ? '...' : '' ?>"
+                                            </p>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                
+                                <div class="card-footer bg-transparent border-0 pt-0">
+                                    <a href="index.php?page=covoiturage-detail&id=<?= $trajet['id'] ?>" 
+                                       class="btn btn-outline-eco w-100">
+                                        Voir les détails
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+            
+            <?php if (!empty($trajets)): ?>
+                <div class="text-center mt-4">
+                    <a href="index.php?page=covoiturage" class="btn-eco-large">
+                        Voir tous les trajets disponibles
+                    </a>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+    <section class="row my-5">
             <div class="col-md-6">
                 <h2>Notre mission</h2>
                 <p>Réduire l'impact environnemental des déplacements en encourageant le covoiturage.</p>
@@ -82,12 +161,4 @@ $trajets = $covoiturageManager->getPublicTrajets();
                 <img src="/Ecoride/src/public/images/pexels-tima-miroshnichenko-5439477.jpg" alt="Covoiturage écologique" class="img-fluid rounded">
             </div>
         </section>
-
-    </main>
-
-    <?php include ROOT_PATH . '/includes/footer.php'; ?>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
-
-</html>
+</main>

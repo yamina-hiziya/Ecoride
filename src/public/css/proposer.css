@@ -1,0 +1,189 @@
+/* Styles CSS  page proposer trajet */
+
+.proposer-container {
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
+}
+
+.hero-proposer {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.hero-stats {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.75rem 1rem;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+}
+
+.stat-icon {
+    font-size: 1.2rem;
+}
+
+.hero-illustration {
+    text-align: center;
+    position: relative;
+}
+
+.car-sharing-visual {
+    position: relative;
+    padding: 2rem;
+}
+
+.car {
+    font-size: 4rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.passengers {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.passenger {
+    font-size: 1.5rem;
+    animation: float 3s ease-in-out infinite;
+    animation-delay: 0.5s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.proposer-form-card {
+    border: none;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.form-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid #f8f9fa;
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 1rem;
+}
+
+.section-title {
+    color: #007bff;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.section-icon {
+    font-size: 1.5rem;
+}
+
+.form-control-lg,
+.form-select-lg {
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.form-control-lg:focus,
+.form-select-lg:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.form-actions {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid #f8f9fa;
+}
+
+.conseils-card {
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border-radius: 15px;
+}
+
+.conseil-item {
+    text-align: center;
+    padding: 1rem;
+}
+
+.conseil-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.conseil-item h6 {
+    color: #007bff;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.conseil-item p {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .hero-proposer {
+        padding: 2rem 0;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-stats {
+        justify-content: center;
+        margin-top: 1rem;
+    }
+    
+    .stat-item {
+        font-size: 0.9rem;
+    }
+    
+    .form-actions .col-md-6 {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Validation Bootstrap */
+.was-validated .form-control:valid {
+    border-color: #28a745;
+}
+
+.was-validated .form-control:invalid {
+    border-color: #dc3545;
+}

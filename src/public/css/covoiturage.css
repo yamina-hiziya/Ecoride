@@ -1,0 +1,309 @@
+/* css section covoiturage liste trajet */
+
+
+.covoiturage-hero {
+    background: linear-gradient(135deg, var(--eco-primary) 0%, var(--eco-secondary) 100%);
+    color: white;
+    padding: 4rem 0;
+    margin-bottom: 2rem;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 600px;
+}
+
+.hero-icon {
+    font-size: 4rem;
+    opacity: 0.8;
+}
+
+/* Filtres de recherche */
+.filters-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 32px var(--eco-shadow);
+    border: 1px solid var(--eco-accent);
+}
+
+.filter-title {
+    color: var(--eco-primary);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--eco-earth);
+}
+
+.filter-label {
+    color: var(--eco-primary);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.filter-group {
+    margin-bottom: 1rem;
+}
+
+/* Statistiques rapides */
+.stat-card {
+    background: linear-gradient(135deg, var(--eco-light) 0%, var(--eco-soft) 100%);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid var(--eco-accent);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--eco-shadow);
+}
+
+.stat-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-number {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--eco-primary);
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    color: var(--eco-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Section trajets */
+.trajets-section {
+    margin-top: 3rem;
+}
+
+.view-options {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.view-options .btn {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.view-options .btn.active {
+    background: var(--eco-secondary);
+    border-color: var(--eco-secondary);
+    color: white;
+}
+
+/* Grille des trajets */
+.trajets-grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.trajet-item {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    border: 1px solid var(--eco-accent);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px var(--eco-shadow);
+}
+
+.trajet-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(45, 80, 22, 0.15);
+    border-color: var(--eco-secondary);
+}
+
+/* Route principale */
+.trajet-route {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--eco-soft);
+}
+
+.route-cities {
+    color: var(--eco-primary);
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.route-price {
+    background: linear-gradient(135deg, var(--eco-earth) 0%, var(--eco-secondary) 100%);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 3px 10px rgba(45, 80, 22, 0.2);
+}
+
+/* Détails du trajet */
+.trajet-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.detail-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--eco-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.5rem;
+    background: var(--eco-soft);
+    border-radius: 8px;
+}
+
+/* Informations conducteur */
+.trajet-driver {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: var(--eco-soft);
+    border-radius: 10px;
+    border-left: 4px solid var(--eco-earth);
+}
+
+.driver-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--eco-earth) 0%, var(--eco-secondary) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.driver-info h6 {
+    color: var(--eco-primary);
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.driver-rating {
+    color: var(--eco-secondary);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Description du trajet */
+.trajet-description {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, rgba(143, 188, 143, 0.05) 0%, rgba(143, 188, 143, 0.1) 100%);
+    border-radius: 8px;
+    color: var(--eco-secondary);
+    font-style: italic;
+    border-left: 3px solid var(--eco-earth);
+}
+
+/* Actions du trajet */
+.trajet-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--eco-accent);
+}
+
+.trajet-actions .btn {
+    flex: 1;
+    padding: 0.75rem;
+    border-radius: 25px;
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* Pagination */
+.pagination-eco .page-link {
+    color: var(--eco-secondary);
+    border-color: var(--eco-accent);
+    background: white;
+    border-radius: 8px;
+    margin: 0 2px;
+    padding: 0.75rem 1rem;
+}
+
+.pagination-eco .page-link:hover {
+    color: white;
+    background: var(--eco-secondary);
+    border-color: var(--eco-secondary);
+}
+
+.pagination-eco .page-item.active .page-link {
+    background: var(--eco-earth);
+    border-color: var(--eco-earth);
+    color: white;
+}
+
+.pagination-eco .page-item.disabled .page-link {
+    color: var(--eco-accent);
+    background: var(--eco-soft);
+    border-color: var(--eco-accent);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .filters-card {
+        padding: 1.5rem;
+    }
+    
+    .trajet-details {
+        grid-template-columns: 1fr;
+    }
+    
+    .route-cities {
+        font-size: 1.1rem;
+    }
+    
+    .trajet-actions {
+        flex-direction: column;
+    }
+    
+    .trajet-route {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .stat-card {
+        margin-bottom: 1rem;
+    }
+}

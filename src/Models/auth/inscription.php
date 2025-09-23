@@ -1,5 +1,5 @@
 <?php
-// filepath: /src/Models/Auth/inscription.php
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -48,7 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         if ($result) {
             // Inscription réussie
-            $_SESSION['success_message'] = "Bienvenue sur Ecoride ! Votre compte a été créé avec succès. Vous pouvez maintenant vous connecter.";
+            $_SESSION['success_message'] = "🎉 Bienvenue sur EcoRide ! Votre compte a été créé avec succès.<br>
+                                           💚 Vous avez reçu <strong>20 crédits écologiques</strong> de bienvenue !<br>
+                                           Vous pouvez maintenant vous connecter.";
             header('Location: index.php?page=connexion');
             exit;
         } else {

@@ -1,0 +1,736 @@
+/* dashboard */
+/* ==========================================================================
+   DASHBOARD ECORIDE - Interface utilisateur
+   ========================================================================== */
+
+/* Variables spécifiques au dashboard */
+:root {
+    --dashboard-primary: #28a745;
+    --dashboard-secondary: #20c997;
+    --dashboard-success: #28a745;
+    --dashboard-info: #17a2b8;
+    --dashboard-warning: #ffc107;
+    --dashboard-danger: #dc3545;
+    --dashboard-light: #f8f9fa;
+    --dashboard-dark: #343a40;
+    
+    --dashboard-gradient: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    --dashboard-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);
+    --dashboard-border-radius: 15px;
+}
+
+/* ==========================================================================
+   LAYOUT PRINCIPAL
+   ========================================================================== */
+
+.dashboard-container {
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
+    padding-bottom: 2rem;
+}
+
+.dashboard-header {
+    background: var(--dashboard-gradient);
+    color: white;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+    border-radius: 0 0 var(--dashboard-border-radius) var(--dashboard-border-radius);
+    box-shadow: var(--dashboard-shadow);
+}
+
+.dashboard-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.dashboard-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 0;
+}
+
+.dashboard-date {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 0.5rem;
+}
+
+/* ==========================================================================
+   CARTES STATISTIQUES
+   ========================================================================== */
+
+.stats-grid {
+    margin-bottom: 3rem;
+}
+
+.stat-card {
+    background: white;
+    border: none;
+    border-radius: var(--dashboard-border-radius);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--dashboard-gradient);
+}
+
+.stat-card.stat-primary::before {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+}
+
+.stat-card.stat-success::before {
+    background: var(--dashboard-gradient);
+}
+
+.stat-card.stat-info::before {
+    background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+}
+
+.stat-card.stat-warning::before {
+    background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
+}
+
+.stat-card-body {
+    padding: 2rem 1.5rem;
+    text-align: center;
+}
+
+.stat-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--dashboard-primary);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--dashboard-dark);
+    margin-bottom: 0.5rem;
+    display: block;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.95rem;
+    color: #6c757d;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-change {
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+
+.stat-change.positive {
+    color: var(--dashboard-success);
+}
+
+.stat-change.negative {
+    color: var(--dashboard-danger);
+}
+
+/* ==========================================================================
+   ACTIONS RAPIDES
+   ========================================================================== */
+
+.quick-actions {
+    margin-bottom: 3rem;
+}
+
+.action-card {
+    background: white;
+    border: none;
+    border-radius: var(--dashboard-border-radius);
+    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+}
+
+.action-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    text-decoration: none;
+    color: inherit;
+}
+
+.action-card-body {
+    padding: 2rem 1.5rem;
+    text-align: center;
+}
+
+.action-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--dashboard-primary);
+}
+
+.action-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--dashboard-dark);
+    margin-bottom: 0.5rem;
+}
+
+.action-description {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   ACTIVITÉ RÉCENTE
+   ========================================================================== */
+
+.activity-section {
+    margin-bottom: 3rem;
+}
+
+.section-header {
+    display: flex;
+    justify-content: between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--dashboard-dark);
+    margin-bottom: 0;
+}
+
+.activity-card {
+    background: white;
+    border: none;
+    border-radius: var(--dashboard-border-radius);
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+}
+
+.activity-item {
+    padding: 1.5rem;
+    border-bottom: 1px solid #f8f9fa;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.activity-item:hover {
+    background-color: #f8f9fa;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    color: var(--dashboard-primary);
+    min-width: 40px;
+    text-align: center;
+}
+
+.activity-content {
+    flex-grow: 1;
+}
+
+.activity-title {
+    font-weight: 600;
+    color: var(--dashboard-dark);
+    margin-bottom: 0.25rem;
+    font-size: 0.95rem;
+}
+
+.activity-description {
+    color: #6c757d;
+    font-size: 0.85rem;
+    margin-bottom: 0;
+}
+
+.activity-time {
+    color: #adb5bd;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    margin-left: 1rem;
+}
+
+/* ==========================================================================
+   TRAJETS RAPIDES
+   ========================================================================== */
+
+.quick-trips {
+    margin-bottom: 3rem;
+}
+
+.trip-card {
+    background: white;
+    border: none;
+    border-radius: var(--dashboard-border-radius);
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.trip-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+.trip-header {
+    background: var(--dashboard-gradient);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: var(--dashboard-border-radius) var(--dashboard-border-radius) 0 0;
+}
+
+.trip-route {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0;
+}
+
+.trip-body {
+    padding: 1.5rem;
+}
+
+.trip-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.trip-info {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.trip-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--dashboard-success);
+}
+
+.trip-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.trip-status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.trip-status.active {
+    background: rgba(40, 167, 69, 0.1);
+    color: var(--dashboard-success);
+}
+
+.trip-status.pending {
+    background: rgba(255, 193, 7, 0.1);
+    color: var(--dashboard-warning);
+}
+
+.trip-status.completed {
+    background: rgba(108, 117, 125, 0.1);
+    color: #6c757d;
+}
+
+/* ==========================================================================
+   GRAPHIQUES ET MÉTRIQUES
+   ========================================================================== */
+
+.metrics-section {
+    margin-bottom: 3rem;
+}
+
+.chart-card {
+    background: white;
+    border: none;
+    border-radius: var(--dashboard-border-radius);
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    height: 400px;
+}
+
+.chart-header {
+    padding: 1.5rem 1.5rem 0;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.chart-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--dashboard-dark);
+    margin-bottom: 0.5rem;
+}
+
+.chart-subtitle {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.chart-body {
+    padding: 1.5rem;
+    height: calc(100% - 100px);
+}
+
+/* ==========================================================================
+   NOTIFICATIONS
+   ========================================================================== */
+
+.notifications-section {
+    margin-bottom: 3rem;
+}
+
+.notification-item {
+    background: white;
+    border: none;
+    border-left: 4px solid var(--dashboard-primary);
+    border-radius: 0 var(--dashboard-border-radius) var(--dashboard-border-radius) 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.notification-item:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.notification-item.warning {
+    border-left-color: var(--dashboard-warning);
+}
+
+.notification-item.danger {
+    border-left-color: var(--dashboard-danger);
+}
+
+.notification-item.info {
+    border-left-color: var(--dashboard-info);
+}
+
+.notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.notification-title {
+    font-weight: 600;
+    color: var(--dashboard-dark);
+    margin-bottom: 0;
+}
+
+.notification-time {
+    font-size: 0.8rem;
+    color: #adb5bd;
+}
+
+.notification-message {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   PROFIL UTILISATEUR
+   ========================================================================== */
+
+.profile-section {
+    margin-bottom: 3rem;
+}
+
+.profile-card {
+    background: white;
+    border: none;
+    border-radius: var(--dashboard-border-radius);
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+}
+
+.profile-header {
+    background: var(--dashboard-gradient);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    border-radius: var(--dashboard-border-radius) var(--dashboard-border-radius) 0 0;
+}
+
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 4px solid white;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.profile-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.profile-role {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.profile-body {
+    padding: 2rem;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.profile-stat {
+    flex: 1;
+}
+
+.profile-stat-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dashboard-primary);
+    display: block;
+}
+
+.profile-stat-label {
+    font-size: 0.8rem;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   BOUTONS ET INTERACTIONS
+   ========================================================================== */
+
+.btn-dashboard {
+    background: var(--dashboard-gradient);
+    border: none;
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+.btn-dashboard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+    color: white;
+}
+
+.btn-dashboard-outline {
+    background: transparent;
+    border: 2px solid var(--dashboard-primary);
+    color: var(--dashboard-primary);
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-dashboard-outline:hover {
+    background: var(--dashboard-primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   RESPONSIVE DASHBOARD
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .dashboard-title {
+        font-size: 2rem;
+    }
+    
+    .dashboard-subtitle {
+        font-size: 1rem;
+    }
+    
+    .stat-card-body {
+        padding: 1.5rem 1rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .stat-icon {
+        font-size: 2.5rem;
+    }
+    
+    .action-card-body {
+        padding: 1.5rem 1rem;
+    }
+    
+    .activity-item {
+        padding: 1rem;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .activity-icon {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+    }
+    
+    .activity-time {
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
+    
+    .trip-details {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .trip-actions {
+        justify-content: center;
+    }
+    
+    .profile-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .dashboard-container {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    
+    .dashboard-header {
+        margin-left: -0.5rem;
+        margin-right: -0.5rem;
+        border-radius: 0;
+    }
+    
+    .stats-grid .col-md-3 {
+        margin-bottom: 1rem;
+    }
+    
+    .quick-actions .col-md-6 {
+        margin-bottom: 1rem;
+    }
+}
+
+/* ==========================================================================
+   ANIMATIONS ET EFFETS
+   ========================================================================== */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dashboard-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.dashboard-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.dashboard-card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.dashboard-card:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+/* Loader pour les statistiques */
+.stat-loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(40, 167, 69, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--dashboard-primary);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { 
+        transform: rotate(360deg); 
+    }
+}
+
+/* ==========================================================================
+   THÈME SOMBRE (optionnel)
+   ========================================================================== */
+
+.dashboard-dark {
+    --dashboard-light: #2c3e50;
+    --dashboard-dark: #ecf0f1;
+    background: #1a1a1a;
+    color: #ecf0f1;
+}
+
+.dashboard-dark .stat-card,
+.dashboard-dark .action-card,
+.dashboard-dark .activity-card,
+.dashboard-dark .trip-card,
+.dashboard-dark .chart-card,
+.dashboard-dark .notification-item,
+.dashboard-dark .profile-card {
+    background: #2c3e50;
+    color: #ecf0f1;
+}
+
+.dashboard-dark .stat-label,
+.dashboard-dark .activity-description,
+.dashboard-dark .trip-info {
+    color: #95a5a6;
+}

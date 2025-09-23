@@ -1,0 +1,648 @@
+/* ==================== CSS HISTORIQUE ==================== */
+
+:root {
+    --historique-primary: #2d5016;
+    --historique-secondary: #8fbc8f;
+    --historique-accent: #e8f5e8;
+    --historique-gradient: linear-gradient(135deg, #2d5016 0%, #8fbc8f 100%);
+    --shadow-light: 0 2px 10px rgba(0,0,0,0.1);
+    --shadow-medium: 0 4px 20px rgba(0,0,0,0.15);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==================== CONTAINER PRINCIPAL ==================== */
+.historique-container {
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
+}
+
+/* ==================== HERO SECTION ==================== */
+.historique-hero {
+    background: var(--historique-gradient);
+    color: white;
+    padding: 4rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.historique-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+    opacity: 0.3;
+}
+
+.historique-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.historique-hero h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.historique-hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 0;
+}
+
+/* ==================== STATISTIQUES RAPIDES ==================== */
+.stats-rapides {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.stat-badge {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 1.5rem 1rem;
+    border-radius: 16px;
+    text-align: center;
+    min-width: 100px;
+    transition: var(--transition-smooth);
+}
+
+.stat-badge:hover {
+    background: rgba(255,255,255,0.25);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+.stat-number {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ==================== SECTION FILTRES ==================== */
+.filtres-section {
+    margin-bottom: 2rem;
+    animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.filtres-section .card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: var(--shadow-light);
+    overflow: hidden;
+    transition: var(--transition-smooth);
+}
+
+.filtres-section .card:hover {
+    box-shadow: var(--shadow-medium);
+    transform: translateY(-2px);
+}
+
+.filtres-section .card-header {
+    background: var(--historique-accent);
+    border-bottom: 1px solid rgba(45, 80, 22, 0.1);
+    padding: 1.5rem;
+}
+
+.filtres-section .card-header h5 {
+    color: var(--historique-primary);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filtres-section .form-label {
+    font-weight: 600;
+    color: var(--historique-primary);
+    margin-bottom: 0.5rem;
+}
+
+.filtres-section .form-select,
+.filtres-section .form-control {
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    transition: var(--transition-smooth);
+    background: white;
+}
+
+.filtres-section .form-select:focus,
+.filtres-section .form-control:focus {
+    border-color: var(--historique-secondary);
+    box-shadow: 0 0 0 3px rgba(143, 188, 143, 0.1);
+}
+
+.filtres-section .btn {
+    border-radius: 10px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+}
+
+.filtres-section .btn-primary {
+    background: var(--historique-gradient);
+    border: none;
+}
+
+.filtres-section .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(45, 80, 22, 0.3);
+}
+
+/* ==================== TRAJETS ==================== */
+.trajets-section {
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.trajet-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-light);
+    border-left: 5px solid var(--historique-secondary);
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+.trajet-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, transparent 0%, rgba(143, 188, 143, 0.02) 100%);
+    pointer-events: none;
+}
+
+.trajet-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    border-left-color: var(--historique-primary);
+}
+
+/* ==================== HEADER TRAJET ==================== */
+.trajet-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--historique-accent);
+    position: relative;
+}
+
+.trajet-route {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--historique-primary);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.ville-depart,
+.ville-arrivee {
+    position: relative;
+}
+
+.arrow {
+    font-size: 1.5rem;
+    color: var(--historique-secondary);
+    margin: 0 0.5rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+.trajet-statut .badge {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-termine {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+}
+
+.badge-annule {
+    background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%);
+    color: white;
+}
+
+.badge-en_cours {
+    background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+    color: #212529;
+}
+
+/* ==================== DÉTAILS TRAJET ==================== */
+.trajet-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.trajet-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1.5rem;
+    flex: 1;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;
+}
+
+.info-item .label {
+    font-size: 0.8rem;
+    color: #6c757d;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-item .value {
+    font-weight: 700;
+    color: var(--historique-primary);
+    font-size: 1.1rem;
+}
+
+/* ==================== ACTIONS TRAJET ==================== */
+.trajet-actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.trajet-actions .btn {
+    border-radius: 12px;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+    border: 2px solid transparent;
+}
+
+.trajet-actions .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.trajet-actions .btn-outline-primary {
+    border-color: var(--historique-primary);
+    color: var(--historique-primary);
+}
+
+.trajet-actions .btn-outline-primary:hover {
+    background: var(--historique-primary);
+    border-color: var(--historique-primary);
+}
+
+.trajet-actions .btn-warning {
+    background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+    border: none;
+}
+
+.trajet-actions .badge {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 15px;
+}
+
+/* ==================== ÉTAT VIDE ==================== */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #6c757d;
+    background: white;
+    border-radius: 20px;
+    box-shadow: var(--shadow-light);
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.6;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.empty-state h4 {
+    color: var(--historique-primary);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.empty-state p {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.empty-state .btn {
+    border-radius: 12px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    background: var(--historique-gradient);
+    border: none;
+}
+
+/* ==================== PAGINATION ==================== */
+.pagination {
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+}
+
+.pagination .page-link {
+    border: 2px solid #e9ecef;
+    color: var(--historique-primary);
+    padding: 0.75rem 1rem;
+    margin: 0 0.25rem;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+}
+
+.pagination .page-link:hover {
+    background: var(--historique-secondary);
+    border-color: var(--historique-secondary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.pagination .page-item.active .page-link {
+    background: var(--historique-gradient);
+    border-color: var(--historique-primary);
+    color: white;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 1200px) {
+    .stats-rapides {
+        justify-content: center;
+        margin-top: 2rem;
+    }
+    
+    .stat-badge {
+        min-width: 90px;
+        padding: 1.25rem 0.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .historique-hero {
+        padding: 2rem 0;
+    }
+    
+    .historique-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .stats-rapides {
+        gap: 0.5rem;
+    }
+    
+    .stat-badge {
+        min-width: 80px;
+        padding: 1rem 0.5rem;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
+    
+    .trajet-card {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .trajet-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .trajet-route {
+        font-size: 1.2rem;
+    }
+    
+    .trajet-details {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+    
+    .trajet-info {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        width: 100%;
+    }
+    
+    .trajet-actions {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .filtres-section .card-body {
+        padding: 1rem;
+    }
+    
+    .filtres-section .row.g-3 {
+        --bs-gutter-x: 0.75rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .historique-hero h1 {
+        font-size: 1.75rem;
+    }
+    
+    .stats-rapides {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .stat-badge {
+        width: 100%;
+        max-width: 200px;
+    }
+    
+    .trajet-info {
+        grid-template-columns: 1fr;
+    }
+    
+    .empty-state {
+        padding: 2rem 1rem;
+    }
+    
+    .empty-icon {
+        font-size: 3rem;
+    }
+}
+
+/* ==================== ANIMATIONS ==================== */
+.trajet-card {
+    animation: slideInUp 0.6s ease-out;
+}
+
+.trajet-card:nth-child(2) { animation-delay: 0.1s; }
+.trajet-card:nth-child(3) { animation-delay: 0.2s; }
+.trajet-card:nth-child(4) { animation-delay: 0.3s; }
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==================== PRINT STYLES ==================== */
+@media print {
+    .filtres-section,
+    .trajet-actions,
+    .pagination {
+        display: none !important;
+    }
+    
+    .historique-hero {
+        background: none !important;
+        color: black !important;
+        padding: 1rem 0 !important;
+    }
+    
+    .trajet-card {
+        break-inside: avoid;
+        margin-bottom: 1rem;
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+    }
+    
+    .stat-badge {
+        background: #f8f9fa !important;
+        border: 1px solid #ccc !important;
+    }
+}
+
+/* ==================== DARK MODE ==================== */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --historique-primary: #4ade80;
+        --historique-secondary: #22d3ee;
+        --historique-accent: #1f2937;
+    }
+    
+    .historique-container {
+        background: linear-gradient(to bottom, #111827 0%, #1f2937 100%);
+        color: #e5e7eb;
+    }
+    
+    .trajet-card {
+        background: #374151;
+        border-left-color: var(--historique-secondary);
+    }
+    
+    .filtres-section .card {
+        background: #374151;
+    }
+    
+    .filtres-section .card-header {
+        background: #4b5563;
+    }
+    
+    .form-select,
+    .form-control {
+        background: #4b5563;
+        border-color: #6b7280;
+        color: #e5e7eb;
+    }
+}
+
+/* ==================== HIGH CONTRAST ==================== */
+@media (prefers-contrast: high) {
+    .trajet-card {
+        border: 2px solid var(--historique-primary);
+    }
+    
+    .badge {
+        border: 2px solid currentColor;
+    }
+    
+    .btn {
+        border-width: 3px;
+    }
+}
+
+/* ==================== REDUCE MOTION ==================== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .trajet-card:hover,
+    .btn:hover,
+    .stat-badge:hover {
+        transform: none !important;
+    }
+}

@@ -1,113 +1,85 @@
 <?php
-// src/Classes/Auth.php
 
-require_once 'Database.php';
+// ============================================================================
+// src/Classes/Auth.php
+// Classe pour gérer l’authentification des utilisateurs
+// ============================================================================
+
+require_once ROOT_PATH . '/src/Classes/Database.php';
 
 class Auth
 {
-
-    private $conn;
+    private $db;
 
     public function __construct()
     {
-        $db = Database::getInstance();
-        $this->conn = $db->getConnection();
-        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // Connexion via la classe Database
+        $this->db = Database::getConnection();
     }
 
-    public function login($email, $password) {
+    /**
+     * Inscription utilisateur
+     */
+    public function register($nom, $email, $password): array
+    {
         try {
-            // Préparer la requête pour récupérer l'utilisateur
-            $stmt = $this->conn->prepare("SELECT id, nom, prenom, email, mot_de_passe FROM utilisateurs WHERE email = ?");
-            $stmt->execute([$email]);
-            
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
-            
-            // Vérifier si l'utilisateur existe et si le mot de passe est correct
+            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+            $sql = "INSERT INTO utilisateurs (nom, email, mot_de_passe, date_inscription)
+                    VALUES (:nom, :email, :mot_de_passe, NOW())";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([
+                ':nom'          => $nom,
+                ':email'        => $email,
+                ':mot_de_passe' => $hashedPassword,
+            ]);
+
+            return ['success' => true, 'message' => "Inscription réussie !"];
+
+        } catch (Exception $e) {
+            return ['success' => false, 'message' => "Erreur inscription : " . $e->getMessage()];
+        }
+    }
+
+    /**
+     * Connexion utilisateur
+     */
+    public function login($email, $password): array
+    {
+        try {
+            $sql = "SELECT * FROM utilisateurs WHERE email = :email LIMIT 1";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([':email' => $email]);
+            $user = $stmt->fetch();
+
             if ($user && password_verify($password, $user['mot_de_passe'])) {
-                // Démarrer la session
-                if (session_status() === PHP_SESSION_NONE) {
-                    session_start();
-                }
-                
-                // Stocker les informations de l'utilisateur en session
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_nom'] = $user['nom'];
-                $_SESSION['user_prenom'] = $user['prenom'];
-                $_SESSION['user_email'] = $user['email'];
-                
-                return true;
+
+                return ['success' => true, 'message' => "Connexion réussie !"];
             }
-            
-            return false;
-        } catch (PDOException $e) {
-            error_log("Erreur lors de la connexion : " . $e->getMessage());
-            return false;
+
+            return ['success' => false, 'message' => "Email ou mot de passe incorrect"];
+
+        } catch (Exception $e) {
+            return ['success' => false, 'message' => "Erreur connexion : " . $e->getMessage()];
         }
-    }
-    
-    public function register($nom, $prenom, $email, $password, $telephone, $pseudo) {
-        try {
-            // Vérifier si l'email existe déjà
-            $stmt = $this->conn->prepare("SELECT id FROM utilisateurs WHERE email = ?");
-            $stmt->execute([$email]);
-            if ($stmt->fetch()) {
-                return false; // Email déjà utilisé
-            }
-            
-            // Vérifier si le pseudo existe déjà
-            $stmt = $this->conn->prepare("SELECT id FROM utilisateurs WHERE pseudo = ?");
-            $stmt->execute([$pseudo]);
-            if ($stmt->fetch()) {
-                return false; // Pseudo déjà utilisé
-            }
-            
-            // Hacher le mot de passe
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    
-            // Préparer la requête pour éviter les injections SQL
-            $stmt = $this->conn->prepare("INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe, telephone, pseudo) VALUES (?, ?, ?, ?, ?, ?)");
-            
-            // Exécuter la requête
-            $stmt->execute([$nom, $prenom, $email, $hashed_password, $telephone, $pseudo]);
-            
-            // Retourner true si l'exécution a réussi
-            return true;
-        } catch (PDOException $e) {
-            // Journaliser l'erreur pour le débogage
-            error_log("Erreur lors de l'insertion dans la base de données : " . $e->getMessage());
-            // En cas d'erreur de base de données, on renvoie false
-            return false;
-        }
-    }
-    public function logout() {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-        session_unset();
-        session_destroy();
     }
 
-    public function isLoggedIn() {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
+    /**
+     * Déconnexion
+     */
+    public function logout()
+    {
+        session_destroy();
+        return ['success' => true, 'message' => "Déconnexion réussie"];
+    }
+
+    /**
+     * Vérifier si l'utilisateur est connecté
+     */
+    public function isLoggedIn(): bool
+    {
         return isset($_SESSION['user_id']);
     }
-    
-    public function getCurrentUser() {
-        if ($this->isLoggedIn()) {
-            return [
-                'id' => $_SESSION['user_id'],
-                'nom' => $_SESSION['user_nom'],
-                'prenom' => $_SESSION['user_prenom'],
-                'email' => $_SESSION['user_email']
-            ];
-        }
-        return null;
-    }
 }
-
-
-
-
