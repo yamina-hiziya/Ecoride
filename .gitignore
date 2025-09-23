@@ -1,0 +1,35 @@
+# === Fichiers système et temporaires ===
+.DS_Store
+Thumbs.db
+*.log
+*.cache
+*.tmp
+*.swp
+
+# === Configuration sensible ===
+.env
+
+# === Dépendances ===
+vendor/
+node_modules/
+
+# === IDE / éditeurs ===
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# === Cache PHP ===
+*.phpunit.result.cache
+.cache/
+coverage/
+
+# === XAMPP / MacOS ===
+/Applications/XAMPP/xamppfiles/temp/
+/Applications/XAMPP/xamppfiles/logs/
+/Applications/XAMPP/xamppfiles/var/
+
+# === Sauvegardes ===
+*.bak
+*.sql
+*.sql.gz
