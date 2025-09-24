@@ -190,7 +190,6 @@ http://localhost/ecoride
 - **Bootstrap** pour le framework CSS
 - **FontAwesome** pour les icônes
 - **XAMPP** pour l'environnement de développement
-- **GitHub Copilot** pour l'assistance au développement
 
 ---
 
